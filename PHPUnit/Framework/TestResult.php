@@ -63,7 +63,7 @@ class PHPUnit_Framework_TestResult implements Countable
     /**
      * @var boolean
      */
-    protected static $xdebugLoaded = NULL;
+    protected static $xdebugAvailable = NULL;
 
     /**
      * @var boolean
@@ -609,9 +609,9 @@ class PHPUnit_Framework_TestResult implements Countable
             }
         }
 
-        if (self::$xdebugLoaded === NULL) {
-            self::$xdebugLoaded = extension_loaded('xdebug');
-            self::$useXdebug    = self::$xdebugLoaded;
+        if (self::$xdebugAvailable === NULL) {
+            self::$xdebugAvailable = function_exists('xdebug_start_code_coverage');
+            self::$useXdebug       = self::$xdebugAvailable;
         }
 
         $useXdebug = self::$useXdebug &&

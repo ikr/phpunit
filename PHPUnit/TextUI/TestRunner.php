@@ -264,7 +264,7 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
         if ((isset($arguments['coverageClover']) ||
              isset($arguments['reportDirectory'])) &&
-             extension_loaded('xdebug')) {
+             function_exists('xdebug_start_code_coverage')) {
             $result->collectCodeCoverageInformation(TRUE);
         }
 
@@ -311,7 +311,8 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
             $this->printer->printResult($result);
         }
 
-        if (extension_loaded('tokenizer') && extension_loaded('xdebug')) {
+        if (extension_loaded('tokenizer') &&
+            function_exists('xdebug_start_code_coverage')) {
             if (isset($arguments['coverageClover'])) {
                 $this->printer->write(
                   "\nWriting code coverage data to XML file, this may take " .
@@ -698,7 +699,7 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
             if ((isset($arguments['coverageClover']) ||
                 isset($arguments['reportDirectory'])) &&
-                extension_loaded('xdebug')) {
+                function_exists('xdebug_start_code_coverage')) {
                 $coverage = PHP_CodeCoverage::getInstance();
 
                 $coverage->setProcessUncoveredFilesFromWhitelist(

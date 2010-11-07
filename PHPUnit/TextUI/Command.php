@@ -269,7 +269,7 @@ class PHPUnit_TextUI_Command
 
                 case '--coverage-clover': {
                     if (extension_loaded('tokenizer') &&
-                        extension_loaded('xdebug')) {
+                        function_exists('xdebug_start_code_coverage')) {
                         $this->arguments['coverageClover'] = $option[1];
                     } else {
                         if (!extension_loaded('tokenizer')) {
@@ -278,7 +278,7 @@ class PHPUnit_TextUI_Command
                             );
                         } else {
                             $this->showMessage(
-                              'The Xdebug extension is not loaded.'
+                              'The xdebug_*_code_coverage() API is not available.'
                             );
                         }
                     }
@@ -287,7 +287,7 @@ class PHPUnit_TextUI_Command
 
                 case '--coverage-html': {
                     if (extension_loaded('tokenizer') &&
-                        extension_loaded('xdebug')) {
+                        function_exists('xdebug_start_code_coverage')) {
                         $this->arguments['reportDirectory'] = $option[1];
                     } else {
                         if (!extension_loaded('tokenizer')) {
@@ -296,7 +296,7 @@ class PHPUnit_TextUI_Command
                             );
                         } else {
                             $this->showMessage(
-                              'The Xdebug extension is not loaded.'
+                              'The xdebug_*_code_coverage() API is not available.'
                             );
                         }
                     }
